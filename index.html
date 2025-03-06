@@ -89,68 +89,6 @@
 <body>
     <button id="cta-button">Нажми меня</button>
 
-    <script type="module">
-        (async () => {
-            const { initializeApp } = await import("https://www.gstatic.com/firebasejs/9.6.1/firebase-app.js");
-            const { getAnalytics, logEvent} = await import("https://www.gstatic.com/firebasejs/9.6.1/firebase-analytics.js");
-            const { getRemoteConfig, fetchAndActivate, getValue } = await import("https://www.gstatic.com/firebasejs/9.6.1/firebase-remote-config.js");
-
-// For Firebase JS SDK v7.20.0 and later, measurementId is optional
-const firebaseConfig = {
-  apiKey: "AIzaSyDD968wISp8HjQ7Fhd57ExUlVws_6ikBLo",
-  authDomain: "pet-project-f8ab0.firebaseapp.com",
-  projectId: "pet-project-f8ab0",
-  storageBucket: "pet-project-f8ab0.firebasestorage.app",
-  messagingSenderId: "485068261793",
-  appId: "1:485068261793:web:b294bb97e805ab2b3523e0",
-  measurementId: "G-1G1F0Y1T38"
-};
-
-            // Инициализируем Firebase
-        const app = initializeApp(firebaseConfig);
-        const analytics = getAnalytics(app);
-        console.log("Google Analytics подключен:", analytics);
-
-        // Remote Config
-        const remoteConfig = getRemoteConfig(app);
-        await fetchAndActivate(remoteConfig);
-        console.log("Remote Config загружен!");
-
-        // Получаем текст кнопки из Remote Config
-        const buttonText = getValue(remoteConfig, "cta_button_text").asString();
-        console.log("cta_button_text:", buttonText);
-
-        // Применяем изменения
-        const button = document.getElementById("cta-button");
-        if (button) {
-            button.textContent = buttonText;
-
-            // Отслеживание кликов на кнопку
-            button.addEventListener("click", () => {
-                console.log("Кнопка CTA нажата!");
-                logEvent(analytics, "cta_button_click", { 
-                    button_text: buttonText 
-                });
-            });
-        } else {
-            console.warn("Кнопка не найдена!");
-        }
-
-        // Отслеживание нажатий на кнопку подписки
-        const subscribeButton = document.getElementById("subscribe-button");
-        const emailInput = document.getElementById("email");
-
-        if (subscribeButton && emailInput) {
-            subscribeButton.addEventListener("click", () => {
-                const email = emailInput.value;
-                console.log("Подписка отправлена:", email);
-                logEvent(analytics, "subscribe_button_click", { 
-                    email: email 
-                });
-            });
-        }
-    })();
-</script>
 </body>
 </html>
 
