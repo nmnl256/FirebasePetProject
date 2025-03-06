@@ -101,10 +101,11 @@
   };
 
   // Initialize Firebase
-  const app = initializeApp(firebaseConfig);
 
   const app = initializeApp(firebaseConfig);
   const analytics = getAnalytics(app);
+  const button = document.getElementById("cta-button");
+button.textContent = remoteConfig.getValue("cta_button_text").asString();  
 
 </script>
 
