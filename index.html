@@ -111,10 +111,6 @@
             console.log("Google Analytics подключен:", analytics);
 
             // Remote Config
-            const remoteConfig = getRemoteConfig(app);
-            remoteConfig.settings = {
-                minimumFetchIntervalMillis: 3600000,
-            };
 
             await fetchAndActivate(remoteConfig);
             console.log("Remote Config загружен!");
