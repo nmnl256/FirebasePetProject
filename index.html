@@ -79,68 +79,30 @@
     <p id="scrolling-info"></p>
   </div>
 
-  <script>
-    // Получаем случайный вариант A/B теста (50% вероятность)
-    const userVariant = Math.random() < 0.5 ? 'variant-a' : 'variant-b';
+  <script type="module">
+  // Import the functions you need from the SDKs you need
+  import { initializeApp } from "https://www.gstatic.com/firebasejs/11.4.0/firebase-app.js";
+  import { getAnalytics } from "https://www.gstatic.com/firebasejs/11.4.0/firebase-analytics.js";
+  // TODO: Add SDKs for Firebase products that you want to use
+  // https://firebase.google.com/docs/web/setup#available-libraries
 
-    // Обновляем внешний вид кнопки и текст на странице в зависимости от выбранного варианта
-    const button = document.getElementById('cta-button');
-    const headline = document.getElementById('headline');
-    const description = document.getElementById('description');
-    const subscribeButton = document.getElementById('subscribe-button');
-    const formContainer = document.getElementById('form-container');
+  // Your web app's Firebase configuration
+  // For Firebase JS SDK v7.20.0 and later, measurementId is optional
+  const firebaseConfig = {
+    apiKey: "AIzaSyDD968wISp8HjQ7Fhd57ExUlVws_6ikBLo",
+    authDomain: "pet-project-f8ab0.firebaseapp.com",
+    projectId: "pet-project-f8ab0",
+    storageBucket: "pet-project-f8ab0.firebasestorage.app",
+    messagingSenderId: "485068261793",
+    appId: "1:485068261793:web:b294bb97e805ab2b3523e0",
+    measurementId: "G-1G1F0Y1T38"
+  };
 
-    button.classList.add(userVariant);
-    button.textContent = userVariant === 'variant-a' ? 'Нажми на зеленую кнопку!' : 'Нажми на синюю кнопку!';
-    
-    // A/B тестируем различные тексты заголовков и описаний
-    if (userVariant === 'variant-a') {
-      headline.textContent = 'Невероятные предложения ждут вас!';
-      description.textContent = 'Наша компания предлагает отличные условия для каждого. Присоединяйтесь!';
-    } else {
-      headline.textContent = 'Получите уникальные возможности!';
-      description.textContent = 'Наши предложения специально для вас. Узнайте больше!';
-    }
+  // Initialize Firebase
+  const app = initializeApp(firebaseConfig);
+  const analytics = getAnalytics(app);
+</script>
 
-    // Логика подсчета кликов по кнопке
-    let buttonClickCount = 0;
-    button.addEventListener('click', () => {
-      buttonClickCount++;
-      console.log(`Кнопка была нажата ${buttonClickCount} раз(а)`);
-      // Можно отправить эту информацию в Firebase Analytics или другую систему аналитики
-    });
-
-    // Форма для подписки (тестируем клики по форме)
-    let formSubmissionCount = 0;
-    subscribeButton.addEventListener('click', () => {
-      const email = document.getElementById('email').value;
-      if (email) {
-        formSubmissionCount++;
-        console.log(`Форма была отправлена ${formSubmissionCount} раз(а)`);
-        // Можно отправить данные формы в Firebase Analytics или другую систему
-        alert(`Спасибо за подписку! Ваш email: ${email}`);
-      } else {
-        alert('Пожалуйста, введите email.');
-      }
-    });
-
-    // Время пребывания на странице
-    let pageLoadTime = Date.now();
-    window.addEventListener('beforeunload', () => {
-      const timeSpent = ((Date.now() - pageLoadTime) / 1000).toFixed(2); // Время в секундах
-      console.log(`Пользователь провел на странице: ${timeSpent} секунд`);
-      // Это можно отправить в Firebase или другую систему для дальнейшего анализа
-    });
-
-    // Подсчет прокрутки страницы
-    let scrollCount = 0;
-    window.addEventListener('scroll', () => {
-      scrollCount++;
-      const scrollPercentage = (window.scrollY / (document.documentElement.scrollHeight - window.innerHeight)) * 100;
-      document.getElementById('scrolling-info').textContent = `Вы прокрутили страницу на ${scrollPercentage.toFixed(2)}%`;
-      console.log(`Страница была прокручена ${scrollCount} раз(а), прокручено ${scrollPercentage.toFixed(2)}% страницы.`);
-    });
-  </script>
 
 </body>
 </html>
