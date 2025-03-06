@@ -111,7 +111,7 @@
             console.log("Google Analytics подключен:", analytics);
 
             // Remote Config
-
+            const remoteConfig = getRemoteConfig(app);
             await fetchAndActivate(remoteConfig);
             console.log("Remote Config загружен!");
             console.log("cta_button_text:", getValue(remoteConfig, "cta_button_text").asString());
