@@ -103,11 +103,22 @@
   // Initialize Firebase
 
   const app = initializeApp(firebaseConfig);
-  const analytics = getAnalytics(app);
-    const remoteConfig = getRemoteConfig(app);
+const remoteConfig = getRemoteConfig(app);
 
-  const button = document.getElementById("cta-button");
-button.textContent = remoteConfig.getValue("cta_button_text").asString();  
+// Опционально: Устанавливаем время жизни кеша (0 = всегда обновлять)
+remoteConfig.settings = {
+  minimumFetchIntervalMillis: 3600000, // 1 час
+};
+
+fetchAndActivate(remoteConfig)
+  .then(() => {
+    console.log("Remote Config загружен!");
+    const buttonText = remoteConfig.getValue("cta_button_text").asString();
+    document.getElementById("cta-button").textContent = buttonText;
+  })
+  .catch((err) => {
+    console.error("Ошибка загрузки Remote Config:", err);
+  });
 
 </script>
 
