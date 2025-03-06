@@ -92,7 +92,7 @@
     <script type="module">
         (async () => {
             const { initializeApp } = await import("https://www.gstatic.com/firebasejs/9.6.1/firebase-app.js");
-            const { getAnalytics } = await import("https://www.gstatic.com/firebasejs/9.6.1/firebase-analytics.js");
+            const { getAnalytics, logEvent} = await import("https://www.gstatic.com/firebasejs/9.6.1/firebase-analytics.js");
             const { getRemoteConfig, fetchAndActivate, getValue } = await import("https://www.gstatic.com/firebasejs/9.6.1/firebase-remote-config.js");
 
             const firebaseConfig = {
@@ -106,25 +106,50 @@
             };
 
             // Инициализируем Firebase
-            const app = initializeApp(firebaseConfig);
-            const analytics = getAnalytics(app);
-            console.log("Google Analytics подключен:", analytics);
+        const app = initializeApp(firebaseConfig);
+        const analytics = getAnalytics(app);
+        console.log("Google Analytics подключен:", analytics);
 
-            // Remote Config
-            const remoteConfig = getRemoteConfig(app);
-            await fetchAndActivate(remoteConfig);
-            console.log("Remote Config загружен!");
-            console.log("cta_button_text:", getValue(remoteConfig, "cta_button_text").asString());
+        // Remote Config
+        const remoteConfig = getRemoteConfig(app);
+        await fetchAndActivate(remoteConfig);
+        console.log("Remote Config загружен!");
 
-            // Применение изменений на странице
-            const button = document.getElementById("cta-button");
-            if (button) {
-                button.textContent = getValue(remoteConfig, "cta_button_text").asString();
-            } else {
-                console.warn("Кнопка не найдена!");
-            }
-        })();
-    </script>
+        // Получаем текст кнопки из Remote Config
+        const buttonText = getValue(remoteConfig, "cta_button_text").asString();
+        console.log("cta_button_text:", buttonText);
+
+        // Применяем изменения
+        const button = document.getElementById("cta-button");
+        if (button) {
+            button.textContent = buttonText;
+
+            // Отслеживание кликов на кнопку
+            button.addEventListener("click", () => {
+                console.log("Кнопка CTA нажата!");
+                logEvent(analytics, "cta_button_click", { 
+                    button_text: buttonText 
+                });
+            });
+        } else {
+            console.warn("Кнопка не найдена!");
+        }
+
+        // Отслеживание нажатий на кнопку подписки
+        const subscribeButton = document.getElementById("subscribe-button");
+        const emailInput = document.getElementById("email");
+
+        if (subscribeButton && emailInput) {
+            subscribeButton.addEventListener("click", () => {
+                const email = emailInput.value;
+                console.log("Подписка отправлена:", email);
+                logEvent(analytics, "subscribe_button_click", { 
+                    email: email 
+                });
+            });
+        }
+    })();
+</script>
 </body>
 </html>
 
