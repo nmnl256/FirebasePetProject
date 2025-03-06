@@ -79,52 +79,58 @@
     <p id="scrolling-info"></p>
   </div>
 
-  <script type="module">
-  // Import the functions you need from the SDKs you need
-import { initializeApp } from "firebase/app";
-import { getAnalytics } from "firebase/analytics";  import { getRemoteConfig, fetchAndActivate, getValue  } from "https://www.gstatic.com/firebasejs/11.4.0/firebase-remote-config.js";
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Firebase Test</title>
+</head>
+<body>
+    <button id="cta-button">Нажми меня</button>
 
-  // TODO: Add SDKs for Firebase products that you want to use
-  // https://firebase.google.com/docs/web/setup#available-libraries
+    <script type="module">
+        (async () => {
+            const { initializeApp } = await import("https://www.gstatic.com/firebasejs/9.6.1/firebase-app.js");
+            const { getAnalytics } = await import("https://www.gstatic.com/firebasejs/9.6.1/firebase-analytics.js");
+            const { getRemoteConfig, fetchAndActivate, getValue } = await import("https://www.gstatic.com/firebasejs/9.6.1/firebase-remote-config.js");
 
-  // Your web app's Firebase configuration
-  // For Firebase JS SDK v7.20.0 and later, measurementId is optional
-  const firebaseConfig = {
-    apiKey: "AIzaSyDD968wISp8HjQ7Fhd57ExUlVws_6ikBLo",
-    authDomain: "pet-project-f8ab0.firebaseapp.com",
-    projectId: "pet-project-f8ab0",
-    storageBucket: "pet-project-f8ab0.firebasestorage.app",
-    messagingSenderId: "485068261793",
-    appId: "1:485068261793:web:b294bb97e805ab2b3523e0",
-    measurementId: "G-1G1F0Y1T38"
-  };
+            const firebaseConfig = {
+                apiKey: "AIzaSyDD968wISp8HjQ7Fhd57ExUlVws_6ikBLo",
+                authDomain: "pet-project-f8ab0.firebaseapp.com",
+                projectId: "pet-project-f8ab0",
+                storageBucket: "pet-project-f8ab0.firebasestorage.app",
+                messagingSenderId: "485068261793",
+                appId: "1:485068261793:web:b294bb97e805ab2b3523e0",
+                measurementId: "G-1G1F0Y1T38"
+            };
 
-  // Initialize Firebase
-// Инициализация Firebase
-  const app = initializeApp(firebaseConfig);
-  const analytics = getAnalytics(app);
-  const remoteConfig = getRemoteConfig(app);
-console.log("Google Analytics подключен:", analytics);
-  // Устанавливаем минимальный интервал обновления (0 = всегда обновлять)
-  remoteConfig.settings = {
-    minimumFetchIntervalMillis: 3600000, // 1 час
-  };
+            // Инициализируем Firebase
+            const app = initializeApp(firebaseConfig);
+            const analytics = getAnalytics(app);
+            console.log("Google Analytics подключен:", analytics);
 
+            // Remote Config
+            const remoteConfig = getRemoteConfig(app);
+            remoteConfig.settings = {
+                minimumFetchIntervalMillis: 3600000,
+            };
 
-fetchAndActivate(remoteConfig)
-  .then(() => {
-    console.log("Remote Config загружен!");
-    console.log("Все параметры:", remoteConfig._config.settings);
-    console.log("cta_button_text:", getValue(remoteConfig, "cta_button_text").asString());
+            await fetchAndActivate(remoteConfig);
+            console.log("Remote Config загружен!");
+            console.log("cta_button_text:", getValue(remoteConfig, "cta_button_text").asString());
 
-    document.getElementById("cta-button").textContent = getValue(remoteConfig, "cta_button_text").asString();
-  })
-  .catch((err) => {
-    console.error("Ошибка загрузки Remote Config:", err);
-  });
-
-  </script>
-
+            // Применение изменений на странице
+            const button = document.getElementById("cta-button");
+            if (button) {
+                button.textContent = getValue(remoteConfig, "cta_button_text").asString();
+            } else {
+                console.warn("Кнопка не найдена!");
+            }
+        })();
+    </script>
+</body>
+</html>
 
 </body>
 </html>
