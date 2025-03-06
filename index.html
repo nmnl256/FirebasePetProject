@@ -104,28 +104,24 @@ import { getAnalytics } from "firebase/analytics";  import { getRemoteConfig, fe
   const app = initializeApp(firebaseConfig);
   const analytics = getAnalytics(app);
   const remoteConfig = getRemoteConfig(app);
-  const analytics = getAnalytics(app);
 console.log("Google Analytics подключен:", analytics);
   // Устанавливаем минимальный интервал обновления (0 = всегда обновлять)
   remoteConfig.settings = {
     minimumFetchIntervalMillis: 3600000, // 1 час
   };
 
-  // Устанавливаем значения по умолчанию (чтобы избежать ошибок, если конфиг не загрузится)
-  remoteConfig.defaultConfig = {
-    "cta_button_text": "Кликни на меня!",
-  };
 
-  // Загружаем конфигурацию и обновляем кнопку
-  fetchAndActivate(remoteConfig)
-    .then(() => {
-      console.log("Remote Config загружен!");
-      const buttonText = getValue(remoteConfig, "cta_button_text").asString();
-      document.getElementById("cta-button").textContent = buttonText;
-    })
-    .catch((err) => {
-      console.error("Ошибка загрузки Remote Config:", err);
-    });
+fetchAndActivate(remoteConfig)
+  .then(() => {
+    console.log("Remote Config загружен!");
+    console.log("Все параметры:", remoteConfig._config.settings);
+    console.log("cta_button_text:", getValue(remoteConfig, "cta_button_text").asString());
+
+    document.getElementById("cta-button").textContent = getValue(remoteConfig, "cta_button_text").asString();
+  })
+  .catch((err) => {
+    console.error("Ошибка загрузки Remote Config:", err);
+  });
 
   </script>
 
