@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>лендинг для A/B теста</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      text-align: center;
+      padding: 50px;
+    }
+    .headline {
+      font-size: 2em;
+      margin-bottom: 20px;
+    }
+    .description {
+      font-size: 1.2em;
+      margin-bottom: 30px;
+    }
+    .cta-button {
+      padding: 15px 30px;
+      font-size: 1.1em;
+      cursor: pointer;
+      border: none;
+      border-radius: 5px;
+      transition: background-color 0.3s ease;
+    }
+    /* A/B тестируемые стили */
+    .cta-button.variant-a {
+      background-color: #4CAF50; /* Зеленая кнопка */
+      color: white;
+    }
+    .cta-button.variant-b {
+      background-color: #008CBA; /* Синяя кнопка */
+      color: white;
+    }
+    .cta-button:hover {
+      background-color: #555;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="content">
+    <h1 class="headline">Добро пожаловать на лендинг!</h1>
+    <p class="description">Это пример лендинга для A/B теста. Мы тестируем различные кнопки с разными стилями.</p>
+    <button class="cta-button variant-a" id="cta-button">Нажми на меня!</button>
+  </div>
+
+  <script>
+    // Firebase Remote Config будет интегрирован здесь
+    // Для начала нужно будет подключить Firebase SDK в будущем
+
+    // Просто для примера A/B теста:
+    const userVariant = Math.random() < 0.5 ? 'variant-a' : 'variant-b'; // 50% на вариант A и B
+
+    // Изменяем кнопку в зависимости от варианта
+    const button = document.getElementById('cta-button');
+    button.classList.remove('variant-a', 'variant-b');
+    button.classList.add(userVariant);
+    button.textContent = userVariant === 'variant-a' ? 'Нажми на зеленую кнопку!' : 'Нажми на синюю кнопку!';
+  </script>
+
+</body>
+</html>
