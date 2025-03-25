@@ -4,11 +4,22 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Артем Лях | Data Analyst</title>
-    <script async src="https://mc.yandex.ru/metrika/tag.js"></script>
-    <script>
-        window.ym = window.ym || function() { (ym.a = ym.a || []).push(arguments); };
-        ym(12345678, "init", { clickmap: true, trackLinks: true, accurateTrackBounce: true });
+    <!-- Yandex.Metrika counter -->
+    <script type="text/javascript">
+        (function(m,e,t,r,i,k,a){m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)};
+        m[i].l=1*new Date();
+        for (var j = 0; j < document.scripts.length; j++) {if (document.scripts[j].src === r) { return; }}
+        k=e.createElement(t),a=e.getElementsByTagName(t)[0],k.async=1,k.src=r,a.parentNode.insertBefore(k,a)})
+        (window, document, "script", "https://mc.yandex.ru/metrika/tag.js", "ym");
+
+        ym(100230832, "init", {
+            clickmap:true,
+            trackLinks:true,
+            accurateTrackBounce:true
+        });
     </script>
+    <noscript><div><img src="https://mc.yandex.ru/watch/100230832" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
+    <!-- /Yandex.Metrika counter -->
     <script>
         document.addEventListener("DOMContentLoaded", function() {
             let startTime = Date.now();
@@ -19,7 +30,7 @@
                 let scrollPosition = window.scrollY || document.documentElement.scrollTop;
                 let scrollPercentage = (scrollPosition / (document.documentElement.scrollHeight - window.innerHeight)) * 100;
                 if (Math.abs(scrollPosition - lastScroll) > 50) {
-                    ym(12345678, "reachGoal", "scroll", { percent: scrollPercentage });
+                    ym(100230832, "reachGoal", "scroll", { percent: scrollPercentage });
                     lastScroll = scrollPosition;
                 }
             });
@@ -28,13 +39,13 @@
                 let selection = window.getSelection().toString();
                 if (selection.length > 0) {
                     textSelections++;
-                    ym(12345678, "reachGoal", "text_selection", { count: textSelections });
+                    ym(100230832, "reachGoal", "text_selection", { count: textSelections });
                 }
             });
 
             window.addEventListener("beforeunload", function() {
                 let timeSpent = (Date.now() - startTime) / 1000;
-                ym(12345678, "reachGoal", "time_on_site", { seconds: timeSpent });
+                ym(100230832, "reachGoal", "time_on_site", { seconds: timeSpent });
             });
         });
     </script>
