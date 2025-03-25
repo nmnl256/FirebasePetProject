@@ -4,59 +4,71 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Артем Лях | Data Analyst</title>
-    <!-- Yandex.Metrika counter -->
-    <script type="text/javascript">
-        (function(m,e,t,r,i,k,a){m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)};
-        m[i].l=1*new Date();
-        for (var j = 0; j < document.scripts.length; j++) {if (document.scripts[j].src === r) { return; }}
-        k=e.createElement(t),a=e.getElementsByTagName(t)[0],k.async=1,k.src=r,a.parentNode.insertBefore(k,a)})
-        (window, document, "script", "https://mc.yandex.ru/metrika/tag.js", "ym");
-
-        ym(100230832, "init", {
-            clickmap:true,
-            trackLinks:true,
-            accurateTrackBounce:true
-        });
-    </script>
-    <noscript><div><img src="https://mc.yandex.ru/watch/100230832" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
-    <!-- /Yandex.Metrika counter -->
-    <script>
-        document.addEventListener("DOMContentLoaded", function() {
-            let startTime = Date.now();
-            let lastScroll = 0;
-            let textSelections = 0;
-
-            window.addEventListener("scroll", function() {
-                let scrollPosition = window.scrollY || document.documentElement.scrollTop;
-                let scrollPercentage = (scrollPosition / (document.documentElement.scrollHeight - window.innerHeight)) * 100;
-                if (Math.abs(scrollPosition - lastScroll) > 50) {
-                    ym(100230832, "reachGoal", "scroll", { percent: scrollPercentage });
-                    lastScroll = scrollPosition;
-                }
-            });
-
-            document.addEventListener("selectionchange", function() {
-                let selection = window.getSelection().toString();
-                if (selection.length > 0) {
-                    textSelections++;
-                    ym(100230832, "reachGoal", "text_selection", { count: textSelections });
-                }
-            });
-
-            window.addEventListener("beforeunload", function() {
-                let timeSpent = (Date.now() - startTime) / 1000;
-                ym(100230832, "reachGoal", "time_on_site", { seconds: timeSpent });
-            });
-        });
-    </script>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+            color: #333;
+        }
+        header {
+            background: #0073e6;
+            color: #fff;
+            padding: 20px;
+            text-align: center;
+        }
+        main {
+            width: 80%;
+            margin: 20px auto;
+            background: #fff;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+        h1, h2 {
+            color: #0073e6;
+        }
+        ul {
+            list-style: none;
+            padding: 0;
+        }
+        li {
+            background: #e3f2fd;
+            margin: 5px 0;
+            padding: 10px;
+            border-radius: 5px;
+        }
+        footer {
+            text-align: center;
+            padding: 20px;
+            background: #0073e6;
+            color: #fff;
+            position: relative;
+            bottom: 0;
+            width: 100%;
+        }
+        button {
+            background: #ff9800;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+        button:hover {
+            background: #e68900;
+        }
+    </style>
 </head>
 <body>
     <header>
         <h1>Артем Лях | Data Analyst</h1>
         <p>📍 Москва | 40 часов в неделю</p>
-        <p>📧 <a href="mailto:aeliakh@edu.hse.ru">aeliakh@edu.hse.ru</a></p>
-        <p>🔗 <a href="https://github.com/nmnl256" target="_blank">GitHub</a></p>
-        <p>📱 <a href="https://t.me/always2alive" target="_blank">Telegram</a></p>
+        <p>📧 <a href="mailto:aeliakh@edu.hse.ru" style="color: white;">aeliakh@edu.hse.ru</a></p>
+        <p>🔗 <a href="https://github.com/nmnl256" target="_blank" style="color: white;">GitHub</a></p>
+        <p>📱 <a href="https://t.me/always2alive" target="_blank" style="color: white;">Telegram</a></p>
     </header>
     <main>
         <h2>О себе</h2>
