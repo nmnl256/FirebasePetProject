@@ -41,4 +41,4 @@
 
 # Контакты:
 -	📧 Email: aeliakh@edu.hse.ru
--	📱 Telegram: Telegram профайл
+- 📱 Telegram: @always2alive
