@@ -114,5 +114,15 @@
     <footer>
         <button onclick="window.location.href='https://t.me/always2alive'">Связаться в Telegram</button>
     </footer>
+<script>
+    document.addEventListener("copy", function (event) {
+        let selectedText = window.getSelection().toString();
+        if (selectedText.includes("aeliakh@edu.hse.ru")) {
+            ym(100230832, "reachGoal", "copy_email");
+            console.log("Событие: копирование email");
+        }
+    });
+</script>
 </body>
+
 </html>
