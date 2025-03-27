@@ -123,6 +123,17 @@
         }
     });
 </script>
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        let githubLink = document.querySelector("a[href='https://github.com/nmnl256']");
+        if (githubLink) {
+            githubLink.addEventListener("click", function () {
+                ym(100230832, "reachGoal", "click_github");
+                console.log("Событие: переход на GitHub");
+            });
+        }
+    });
+</script>
 </body>
 
 </html>
