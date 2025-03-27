@@ -16,8 +16,8 @@
 - Google colab
 
 ## Ссылки на проект:
--	Ссылка на веб-страницу с интеграцией Яндекс.Метрики: Ссылка на лендинг
--	Ссылка на Colab с моделью логистической регрессии: Ссылка на проект в Colab
+-	[Ссылка на лендинг](https://nmnl256.github.io/FirebasePetProject/)
+-	[Ссылка на проект в Colab](https://colab.research.google.com/drive/1G9mkplP7E5DaGSUlPjTBgOQhX-9EJilG?usp=sharing)
 
 # Описание проекта
 
