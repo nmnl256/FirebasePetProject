@@ -153,5 +153,42 @@
         }
     });
 </script>
+<script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs"></script>
+<script>
+    // Загружаем предобученные веса модели логистической регрессии
+    const weights = [0.0308, 1.5321, 2.5861, -0.0052];
+    const bias = 0; // Можно настроить, если есть
+
+    function sigmoid(z) {
+        return 1 / (1 + Math.exp(-z));
+    }
+
+    function predictProbability(visits, emailCopy, githubClick, duration) {
+        let features = [1, visits, emailCopy, githubClick, duration];
+        let weightedSum = features.reduce((sum, val, i) => sum + val * weights[i], bias);
+        return sigmoid(weightedSum);
+    }
+
+    function updateProbability() {
+        let visits = parseInt(document.getElementById("visits").value) || 0;
+        let emailCopy = document.getElementById("emailCopy").checked ? 1 : 0;
+        let githubClick = document.getElementById("githubClick").checked ? 1 : 0;
+        let duration = parseFloat(document.getElementById("duration").value) || 0;
+
+        let probability = predictProbability(visits, emailCopy, githubClick, duration);
+        let percentage = (probability * 100).toFixed(2);
+        document.getElementById("probabilityOutput").innerText = `Вероятность: ${percentage}%`;
+    }
+</script>
+
+<div style="margin-top: 20px; padding: 10px; background: #f8f8f8; border-radius: 5px;">
+    <h3>Предсказание вероятности перехода в Telegram</h3>
+    <label>Количество визитов: <input type="number" id="visits" value="1" onchange="updateProbability()"></label><br>
+    <label>Копировал email? <input type="checkbox" id="emailCopy" onchange="updateProbability()"></label><br>
+    <label>Кликал на GitHub? <input type="checkbox" id="githubClick" onchange="updateProbability()"></label><br>
+    <label>Время на сайте (сек): <input type="number" id="duration" value="20" onchange="updateProbability()"></label><br>
+    <h3 id="probabilityOutput">Вероятность: 0%</h3>
+</div>
+
 </body>
 </html>
