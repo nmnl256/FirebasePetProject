@@ -133,25 +133,74 @@
     <footer>
         <button onclick="window.location.href='https://t.me/always2alive'">Связаться в Telegram</button>
     </footer>
+
+<!-- Подключаем TensorFlow.js -->
+<script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs"></script>
+
 <script>
-    document.addEventListener("copy", function (event) {
-        let selectedText = window.getSelection().toString();
-        if (selectedText.includes("aeliakh@edu.hse.ru")) {
-            ym(100230832, "reachGoal", "copy_email");
-            console.log("Событие: копирование email");
-        }
-    });
-</script>
-<script>
+    let model;
+
+    // Загружаем модель
+    async function loadModel() {
+        model = await tf.loadLayersModel('path_to_your_model/model.json'); // Укажите путь к вашей модели
+        console.log('Модель загружена');
+    }
+
+    loadModel(); // Загружаем модель при загрузке страницы
+
+    // Переменные для сбора метрик
+    let visitCount = 0;
+    let timeSpent = 0;
+    let emailCopied = 0;
+    let githubClicked = 0;
+
+    // Событие клика по ссылке на GitHub
     document.addEventListener("DOMContentLoaded", function () {
         let githubLink = document.querySelector("a[href='https://github.com/nmnl256']");
         if (githubLink) {
             githubLink.addEventListener("click", function () {
+                githubClicked = 1; // Переход на GitHub
                 ym(100230832, "reachGoal", "click_github");
                 console.log("Событие: переход на GitHub");
             });
         }
     });
+
+    // Событие копирования email
+    document.addEventListener("copy", function (event) {
+        let selectedText = window.getSelection().toString();
+        if (selectedText.includes("aeliakh@edu.hse.ru")) {
+            emailCopied = 1; // Копирование email
+            ym(100230832, "reachGoal", "copy_email");
+            console.log("Событие: копирование email");
+        }
+    });
+
+    // Считаем время, проведенное на сайте
+    setInterval(() => {
+        timeSpent += 1; // Увеличиваем время каждую секунду
+    }, 1000);
+
+    // Событие визита на страницу
+    window.addEventListener("load", function () {
+        visitCount += 1; // Увеличиваем счетчик визитов при загрузке страницы
+    });
+
+    // Функция для предсказания
+    async function predictGoal() {
+        if (model) {
+            const inputData = tf.tensor2d([[visitCount, timeSpent, emailCopied, githubClicked]]);
+            const prediction = await model.predict(inputData);
+            const probability = prediction.dataSync()[0];
+            console.log(`Предсказанная вероятность перехода в Telegram: ${probability}`);
+            // Здесь можно использовать предсказание для принятия решения (например, показывать пользователю предложение)
+        } else {
+            console.log("Модель не загружена");
+        }
+    }
+
+    // Проверка предсказания каждую минуту
+    setInterval(predictGoal, 60000); // Каждую минуту делаем предсказание
 </script>
 </body>
 </html>
