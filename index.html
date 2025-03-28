@@ -142,7 +142,7 @@
 
     // Загружаем модель
     async function loadModel() {
-        model = await tf.loadLayersModel('tfjs/model.json'); // Указываем путь к модели в папке tfjs
+        model = await tf.loadLayersModel('tfjs/model.json');
         console.log('Модель загружена');
     }
 
@@ -189,8 +189,13 @@
     // Функция для предсказания
     async function predictGoal() {
         if (model) {
-            const inputData = tf.tensor2d([[visitCount, timeSpent, emailCopied, githubClicked]]);
+            // Создаем тензор с правильной формой [1, 4] для одного примера
+            const inputData = tf.tensor2d([[visitCount, timeSpent, emailCopied, githubClicked]], [1, 4]);
+
+            // Проводим предсказание
             const prediction = await model.predict(inputData);
+
+            // Получаем результат предсказания
             const probability = prediction.dataSync()[0];
             console.log(`Предсказанная вероятность перехода в Telegram: ${probability}`);
             // Здесь можно использовать предсказание для принятия решения (например, показывать пользователю предложение)
