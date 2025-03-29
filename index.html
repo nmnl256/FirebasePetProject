@@ -142,7 +142,8 @@
 
     // Загружаем модель
     async function loadModel() {
-        model = await tf.loadLayersModel('tfjs/model.json');
+        const modelUrl = 'tfjs/model.json';  // Указываем путь к model.json
+        const model = await tf.loadLayersModel(modelUrl);  // Загружаем модель
         console.log('Модель загружена');
     }
 
