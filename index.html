@@ -191,5 +191,35 @@
         
         setInterval(calculateProbability, 5000);
     </script>
+    <h2>Форма обратной связи</h2>
+<form id="feedback-form">
+ail" name="email" required><br><br>
+
+    <label for="message">Сообщение:</label><br>
+    <textarea id="message" name="message" rows="4" cols="50" required></textarea><br><br>
+
+    <button type="submit">Отправить</button>
+</form>
+
+<script>
+    document.getElementById('feedback-form').addEventListener('submit', function(event) {
+        event.preventDefault(); // Отменяем стандартное поведение формы
+
+        // Получаем данные из формы
+        var name = document.getElementById('name').value;
+        var email = document.getElementById('email').value;
+        var message = document.getElementById('message').value;
+
+        // Отправка данных в Яндекс.Метрику как параметры события
+        ym(100230832, "reachGoal", "feedback_submitted", {
+
+            'message': message
+        });
+
+        // Оповещение для пользователя
+        alert("Спасибо за ваш отзыв");
+        document.getElementById('feedback-form').reset();
+    });
+</script>
 </body>
 </html>
