@@ -205,9 +205,6 @@ ail" name="email" required><br><br>
     document.getElementById('feedback-form').addEventListener('submit', function(event) {
         event.preventDefault(); // Отменяем стандартное поведение формы
 
-        // Получаем данные из формы
-        var name = document.getElementById('name').value;
-        var email = document.getElementById('email').value;
         var message = document.getElementById('message').value;
 
         // Отправка данных в Яндекс.Метрику как параметры события
