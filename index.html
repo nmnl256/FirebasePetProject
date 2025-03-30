@@ -37,29 +37,30 @@
         }
 
         .contact-info h1 {
-            font-size: 28px; /* Увеличиваем размер шрифта */
+            font-size: 32px;
+            margin: 0;
         }
 
         .contact-info p {
-            font-size: 18px; /* Увеличиваем размер шрифта */
+            font-size: 18px;
             margin: 5px 0;
         }
 
         .contact-info a {
-            color: #0073e6; /* Изменяем цвет ссылок */
+            color: #0073e6;
             text-decoration: none;
         }
 
         .contact-info a:hover {
-            color: #005bb5; /* Цвет при наведении */
+            color: #005bb5;
         }
 
         .form-container {
             flex: 0 0 300px; /* Фиксированная ширина */
             padding: 20px;
-            background-color: transparent; /* Убираем серый фон */
+            background-color: #ffffff;
             border-radius: 10px;
-            box-shadow: none; /* Убираем тень */
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
             margin-left: 20px;
         }
 
@@ -84,6 +85,8 @@
             padding: 12px 0;
             font-size: 14px;
             cursor: pointer;
+            border: none;
+            border-radius: 8px;
         }
 
         .form-container button:hover {
@@ -125,8 +128,8 @@
 
         li {
             background: #f9f9f9;
-            margin: 5px 0; /* Уменьшаем отступы между пунктами */
-            padding: 10px 15px; /* Уменьшаем padding */
+            margin: 5px 0;
+            padding: 10px;
             border-radius: 8px;
             box-shadow: 0 1px 4px rgba(0, 0, 0, 0.1);
         }
@@ -140,14 +143,12 @@
             padding: 20px;
             background-color: #ffffff;
             box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-            position: fixed; /* Кнопка будет приклеена к низу экрана */
-            bottom: 20px;
-            left: 50%;
-            transform: translateX(-50%);
-            width: auto;
+            position: fixed;
+            bottom: 0;
+            width: 100%;
         }
 
-        footer button {
+        button {
             background-color: #0073e6;
             color: #ffffff;
             padding: 12px 30px;
@@ -158,19 +159,17 @@
             transition: background-color 0.3s ease;
         }
 
-        footer button:hover {
+        button:hover {
             background-color: #005bb5;
         }
 
-        /* Стили для ссылок */
-        a {
-            color: #0073e6; /* Изменяем цвет ссылок */
-            text-decoration: none;
+        /* Новый стиль для кнопки связаться в Telegram */
+        footer button {
+            width: 100%;
+            padding: 14px 0;
+            font-size: 18px;
         }
 
-        a:hover {
-            color: #005bb5; /* Цвет при наведении */
-        }
     </style>
 </head>
 <body>
@@ -303,7 +302,6 @@
         
         setInterval(calculateProbability, 5000);
     </script>
-
 
 <script>
     document.getElementById('feedback-form').addEventListener('submit', function(event) {
