@@ -1,5 +1,4 @@
 <!DOCTYPE html>
-<!DOCTYPE html>
 <html lang="ru">
 <head>
     <meta charset="UTF-8">
@@ -30,8 +29,16 @@
 
         header p {
             font-size: 14px;
-            color: #777;
+            color: #555;
             margin: 5px 0;
+        }
+
+        header a {
+            color: #0073e6;
+        }
+
+        header a:hover {
+            text-decoration: underline;
         }
 
         main {
@@ -104,15 +111,6 @@
             background-color: #005bb5;
         }
 
-        a {
-            color: #0073e6;
-            text-decoration: none;
-        }
-
-        a:hover {
-            text-decoration: underline;
-        }
-
         /* Форма обратной связи */
         .form-container {
             margin-top: 30px;
@@ -151,7 +149,6 @@
 
     </style>
 </head>
-
 <body>
    <script type="text/javascript" >
    (function(m,e,t,r,i,k,a){m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)};
@@ -168,16 +165,22 @@
 </script>
 <noscript><div><img src="https://mc.yandex.ru/watch/100230832" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
 <!-- /Yandex.Metrika counter -->
-    <header>
-        <h1>Артем Лях | Data Analyst</h1>
-        <p>📍 Москва | 40 часов в неделю</p>
-        <p>📧 <a href="mailto:aeliakh@edu.hse.ru" style="color: white;">aeliakh@edu.hse.ru</a></p>
-        <p>🔗 <a href="https://github.com/nmnl256" target="_blank" style="color: white;">GitHub</a></p>
-        <p>📱 <a href="https://t.me/always2alive" target="_blank" style="color: white;">Telegram</a></p>
-        <p id="probabilityResult" style="font-weight: bold; color: yellow;">Вероятность перехода: 0%</p>
+<header>
+    <h1>Артем Лях | Data Analyst</h1>
+    <p>📍 Москва | 40 часов в неделю</p>
+    <p>📧 <a href="mailto:aeliakh@edu.hse.ru">aeliakh@edu.hse.ru</a></p>
+    <p>🔗 <a href="https://github.com/nmnl256" target="_blank">GitHub</a></p>
+    <p>📱 <a href="https://t.me/always2alive" target="_blank">Telegram</a></p>
+</header>
 
-        
-    </header>
+<div class="form-container">
+    <h3>Форма обратной связи</h3>
+    <form id="feedback-form">
+        <textarea id="message" placeholder="Ваше сообщение" rows="4" required></textarea>
+        <button type="submit">Отправить отзыв</button>
+    </form>
+</div>
+
     <main>
         <h2>О себе</h2>
         <p>Студент Бизнес-информатики ВШБ НИУ ВШЭ с опытом работы в роли бизнес-аналитика. Умею анализировать пользовательское поведение, проводить A/B-тесты и строить дашборды. Хорошо разбираюсь в SQL, Python, статистике и визуализации данных.</p>
@@ -271,14 +274,7 @@
         
         setInterval(calculateProbability, 5000);
     </script>
-    <h2>Форма обратной связи</h2>
-<form id="feedback-form">
 
-    <label for="message">Сообщение:</label><br>
-    <textarea id="message" name="message" rows="4" cols="50" required></textarea><br><br>
-
-    <button type="submit">Отправить</button>
-</form>
 
 <script>
     document.getElementById('feedback-form').addEventListener('submit', function(event) {
