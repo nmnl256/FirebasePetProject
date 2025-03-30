@@ -16,6 +16,8 @@
         }
 
         header {
+            display: flex;
+            justify-content: space-between;
             background-color: #ffffff;
             padding: 20px 40px;
             box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
@@ -39,6 +41,54 @@
 
         header a:hover {
             text-decoration: underline;
+        }
+
+        /* Контейнер для блока с контактами и формы */
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            width: 100%;
+        }
+
+        .contact-info {
+            flex: 1;
+            padding-right: 20px;
+        }
+
+        .form-container {
+            flex: 0 0 300px; /* Фиксированная ширина */
+            padding: 20px;
+            background-color: #fafafa;
+            border-radius: 10px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+            margin-left: 20px;
+        }
+
+        .form-container h3 {
+            font-size: 18px;
+            margin-bottom: 15px;
+        }
+
+        .form-container input,
+        .form-container textarea {
+            width: 100%;
+            padding: 10px;
+            margin: 10px 0;
+            border-radius: 8px;
+            border: 1px solid #ddd;
+            font-size: 14px;
+        }
+
+        .form-container button {
+            width: 100%;
+            background-color: #0073e6;
+            padding: 12px 0;
+            font-size: 14px;
+            cursor: pointer;
+        }
+
+        .form-container button:hover {
+            background-color: #005bb5;
         }
 
         main {
@@ -111,42 +161,6 @@
             background-color: #005bb5;
         }
 
-        /* Форма обратной связи */
-        .form-container {
-            margin-top: 30px;
-            padding: 30px;
-            background-color: #fafafa;
-            border-radius: 10px;
-            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
-        }
-
-        .form-container h3 {
-            font-size: 20px;
-            margin-bottom: 20px;
-        }
-
-        .form-container input, 
-        .form-container textarea {
-            width: 100%;
-            padding: 10px;
-            margin: 10px 0;
-            border-radius: 8px;
-            border: 1px solid #ddd;
-            font-size: 16px;
-        }
-
-        .form-container button {
-            width: 100%;
-            background-color: #0073e6;
-            padding: 12px 0;
-            font-size: 16px;
-            cursor: pointer;
-        }
-
-        .form-container button:hover {
-            background-color: #005bb5;
-        }
-
     </style>
 </head>
 <body>
@@ -173,6 +187,7 @@
             <p>📧 <a href="mailto:aeliakh@edu.hse.ru">aeliakh@edu.hse.ru</a></p>
             <p>🔗 <a href="https://github.com/nmnl256" target="_blank">GitHub</a></p>
             <p>📱 <a href="https://t.me/always2alive" target="_blank">Telegram</a></p>
+            <p id="probabilityResult" style="font-weight: bold; color: black;">Вероятность перехода: 0%</p>
         </div>
         <div class="form-container">
             <h3>Форма обратной связи</h3>
