@@ -13,7 +13,6 @@
             background-color: #f6f6f6;
             color: #333;
             line-height: 1.6;
-            transition: background-color 0.3s ease, color 0.3s ease;
         }
 
         header {
@@ -23,14 +22,13 @@
             background-color: #ffffff;
             padding: 20px 40px;
             box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-            transition: background-color 0.3s ease;
         }
 
         .header-content {
             display: flex;
             justify-content: space-between;
             width: 100%;
-            max-width: 1200px;
+            max-width: 1200px; /* Устанавливаем максимальную ширину для контента */
         }
 
         .contact-info {
@@ -38,16 +36,30 @@
             padding-right: 20px;
         }
 
+        .contact-info h1 {
+            font-size: 28px; /* Увеличиваем размер шрифта */
+        }
+
         .contact-info p {
-            font-size: 18px;
+            font-size: 18px; /* Увеличиваем размер шрифта */
+            margin: 5px 0;
+        }
+
+        .contact-info a {
+            color: #0073e6; /* Изменяем цвет ссылок */
+            text-decoration: none;
+        }
+
+        .contact-info a:hover {
+            color: #005bb5; /* Цвет при наведении */
         }
 
         .form-container {
-            flex: 0 0 300px;
+            flex: 0 0 300px; /* Фиксированная ширина */
             padding: 20px;
-            background-color: #fafafa;
+            background-color: transparent; /* Убираем серый фон */
             border-radius: 10px;
-            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+            box-shadow: none; /* Убираем тень */
             margin-left: 20px;
         }
 
@@ -86,7 +98,6 @@
             padding: 30px;
             border-radius: 10px;
             box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
-            transition: background-color 0.3s ease;
         }
 
         h2 {
@@ -114,8 +125,8 @@
 
         li {
             background: #f9f9f9;
-            margin: 10px 0;
-            padding: 15px;
+            margin: 5px 0; /* Уменьшаем отступы между пунктами */
+            padding: 10px 15px; /* Уменьшаем padding */
             border-radius: 8px;
             box-shadow: 0 1px 4px rgba(0, 0, 0, 0.1);
         }
@@ -129,14 +140,14 @@
             padding: 20px;
             background-color: #ffffff;
             box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-            position: fixed;
-            bottom: 0;
-            left: 0;
-            right: 0;
-            width: 100%;
+            position: fixed; /* Кнопка будет приклеена к низу экрана */
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: auto;
         }
 
-        button {
+        footer button {
             background-color: #0073e6;
             color: #ffffff;
             padding: 12px 30px;
@@ -147,57 +158,18 @@
             transition: background-color 0.3s ease;
         }
 
-        button:hover {
+        footer button:hover {
             background-color: #005bb5;
         }
 
-        .dark-mode {
-            background-color: #222;
-            color: #eee;
+        /* Стили для ссылок */
+        a {
+            color: #0073e6; /* Изменяем цвет ссылок */
+            text-decoration: none;
         }
 
-        .dark-mode header {
-            background-color: #333;
-        }
-
-        .dark-mode main {
-            background-color: #333;
-        }
-
-        .dark-mode footer {
-            background-color: #333;
-        }
-
-        .dark-mode .form-container {
-            background-color: #444;
-        }
-
-        .dark-mode li {
-            background: #444;
-            color: #ddd;
-        }
-
-        .dark-mode a {
-            color: #9cf;
-        }
-
-        .dark-mode #probabilityResult {
-            color: #fff;
-        }
-
-        .dark-mode .contact-info a {
-            color: #9cf;
-        }
-
-        .dark-mode .contact-info p {
-            color: #fff;
-        }
-
-        .dark-mode .form-container input,
-        .dark-mode .form-container textarea {
-            background-color: #555;
-            color: #eee;
-            border: 1px solid #666;
+        a:hover {
+            color: #005bb5; /* Цвет при наведении */
         }
     </style>
 </head>
@@ -230,6 +202,7 @@
         <div class="form-container">
             <h3>Форма обратной связи</h3>
             <form id="feedback-form">
+    
                 <textarea id="message" placeholder="Ваше сообщение" rows="4" required></textarea>
                 <button type="submit">Отправить отзыв</button>
             </form>
@@ -260,6 +233,7 @@
         <li>Разработал модель логистической регрессии для предсказания вероятности перехода пользователя в Telegram на основе собранных данных.</li>
         <li>Проект позволяет отслеживать поведение пользователей на сайте и использовать это для предсказания их действий.</li>
         <li>Реализован сбор обратной связи без бекенда.</li>
+
         </ul>
         <p>Ссылка на лендинг: <a href="https://nmnl256.github.io/FirebasePetProject/" target="_blank">Здесь</a></p>
         <p>Ссылка на колаб: <a href="https://colab.research.google.com/drive/1G9mkplP7E5DaGSUlPjTBgOQhX-9EJilG?usp=sharing" target="_blank">Здесь</a></p>
@@ -284,7 +258,6 @@
     <footer>
         <button onclick="window.location.href='https://t.me/always2alive'">Связаться в Telegram</button>
     </footer>
-
     <script>
         let visits = localStorage.getItem("visits") ? parseInt(localStorage.getItem("visits")) + 1 : 1;
         localStorage.setItem("visits", visits);
@@ -331,6 +304,7 @@
         setInterval(calculateProbability, 5000);
     </script>
 
+
 <script>
     document.getElementById('feedback-form').addEventListener('submit', function(event) {
         event.preventDefault(); // Отменяем стандартное поведение формы
@@ -348,6 +322,5 @@
         document.getElementById('feedback-form').reset();
     });
 </script>
-
 </body>
 </html>
