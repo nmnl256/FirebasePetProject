@@ -13,6 +13,7 @@
             background-color: #f6f6f6;
             color: #333;
             line-height: 1.6;
+            transition: background-color 0.3s ease, color 0.3s ease;
         }
 
         header {
@@ -22,6 +23,7 @@
             background-color: #ffffff;
             padding: 20px 40px;
             box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            transition: background-color 0.3s ease;
         }
 
         .header-content {
@@ -37,13 +39,13 @@
         }
 
         .contact-info p {
-            font-size: 18px; /* Увеличен шрифт */
+            font-size: 18px;
         }
 
         .form-container {
             flex: 0 0 300px;
             padding: 20px;
-            background-color: #ffffff; /* Белый фон для формы */
+            background-color: #fafafa;
             border-radius: 10px;
             box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
             margin-left: 20px;
@@ -84,6 +86,7 @@
             padding: 30px;
             border-radius: 10px;
             box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+            transition: background-color 0.3s ease;
         }
 
         h2 {
@@ -112,7 +115,7 @@
         li {
             background: #f9f9f9;
             margin: 10px 0;
-            padding: 10px; /* Уменьшены отступы */
+            padding: 15px;
             border-radius: 8px;
             box-shadow: 0 1px 4px rgba(0, 0, 0, 0.1);
         }
@@ -128,8 +131,9 @@
             box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
             position: fixed;
             bottom: 0;
+            left: 0;
+            right: 0;
             width: 100%;
-            z-index: 10;
         }
 
         button {
@@ -147,44 +151,54 @@
             background-color: #005bb5;
         }
 
-        .theme-switcher {
-            position: fixed;
-            top: 20px;
-            right: 20px;
-            background-color: #0073e6;
-            color: white;
-            padding: 10px;
-            border: none;
-            border-radius: 50%;
-            cursor: pointer;
-            font-size: 16px;
+        .dark-mode {
+            background-color: #222;
+            color: #eee;
         }
 
-        /* Темная тема */
-        body.dark-theme {
-            background-color: #2f2f2f;
-            color: #e0e0e0;
-        }
-
-        .dark-theme header,
-        .dark-theme main,
-        .dark-theme footer {
+        .dark-mode header {
             background-color: #333;
         }
 
-        .dark-theme .form-container {
+        .dark-mode main {
+            background-color: #333;
+        }
+
+        .dark-mode footer {
+            background-color: #333;
+        }
+
+        .dark-mode .form-container {
             background-color: #444;
         }
 
-        .dark-theme p,
-        .dark-theme li {
-            color: #e0e0e0;
+        .dark-mode li {
+            background: #444;
+            color: #ddd;
         }
 
-        .dark-theme button {
-            background-color: #005bb5;
+        .dark-mode a {
+            color: #9cf;
         }
 
+        .dark-mode #probabilityResult {
+            color: #fff;
+        }
+
+        .dark-mode .contact-info a {
+            color: #9cf;
+        }
+
+        .dark-mode .contact-info p {
+            color: #fff;
+        }
+
+        .dark-mode .form-container input,
+        .dark-mode .form-container textarea {
+            background-color: #555;
+            color: #eee;
+            border: 1px solid #666;
+        }
     </style>
 </head>
 <body>
@@ -216,7 +230,6 @@
         <div class="form-container">
             <h3>Форма обратной связи</h3>
             <form id="feedback-form">
-    
                 <textarea id="message" placeholder="Ваше сообщение" rows="4" required></textarea>
                 <button type="submit">Отправить отзыв</button>
             </form>
@@ -247,7 +260,6 @@
         <li>Разработал модель логистической регрессии для предсказания вероятности перехода пользователя в Telegram на основе собранных данных.</li>
         <li>Проект позволяет отслеживать поведение пользователей на сайте и использовать это для предсказания их действий.</li>
         <li>Реализован сбор обратной связи без бекенда.</li>
-
         </ul>
         <p>Ссылка на лендинг: <a href="https://nmnl256.github.io/FirebasePetProject/" target="_blank">Здесь</a></p>
         <p>Ссылка на колаб: <a href="https://colab.research.google.com/drive/1G9mkplP7E5DaGSUlPjTBgOQhX-9EJilG?usp=sharing" target="_blank">Здесь</a></p>
@@ -273,17 +285,7 @@
         <button onclick="window.location.href='https://t.me/always2alive'">Связаться в Telegram</button>
     </footer>
 
-    <!-- Переключатель темы -->
-    <button class="theme-switcher" onclick="toggleTheme()">🌙</button>
-
     <script>
-        // Переключение темы
-        function toggleTheme() {
-            document.body.classList.toggle('dark-theme');
-            const themeButton = document.querySelector('.theme-switcher');
-            themeButton.textContent = document.body.classList.contains('dark-theme') ? '🌞' : '🌙';
-        }
-
         let visits = localStorage.getItem("visits") ? parseInt(localStorage.getItem("visits")) + 1 : 1;
         localStorage.setItem("visits", visits);
         
@@ -327,21 +329,25 @@
         }
         
         setInterval(calculateProbability, 5000);
-
-        document.getElementById('feedback-form').addEventListener('submit', function(event) {
-            event.preventDefault(); // Отменяем стандартное поведение формы
-
-            var message = document.getElementById('message').value;
-
-            // Отправка данных в Яндекс.Метрику как параметры события
-            ym(100230832, "reachGoal", "feedback_submitted", {
-                'message': message
-            });
-
-            // Оповещение для пользователя
-            alert("Спасибо за ваш отзыв");
-            document.getElementById('feedback-form').reset();
-        });
     </script>
+
+<script>
+    document.getElementById('feedback-form').addEventListener('submit', function(event) {
+        event.preventDefault(); // Отменяем стандартное поведение формы
+
+        var message = document.getElementById('message').value;
+
+        // Отправка данных в Яндекс.Метрику как параметры события
+        ym(100230832, "reachGoal", "feedback_submitted", {
+
+            'message': message
+        });
+
+        // Оповещение для пользователя
+        alert("Спасибо за ваш отзыв");
+        document.getElementById('feedback-form').reset();
+    });
+</script>
+
 </body>
 </html>
